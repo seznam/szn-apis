@@ -1,0 +1,17 @@
+<link rel="import" href="promise.html" />
+
+<script src="//api.mapy.cz/loader.js"></script>
+<script>
+	(function() {
+		var promise = null;
+
+		var proto = Object.create(HTMLElement.prototype);
+		proto.load = function() { return promise; }
+		document.registerElement("szn-map-api", {prototype:proto});
+
+		promise = new Promise(function(resolve, reject) {
+			Loader.async = true;
+			Loader.load(null, {pano:true}, resolve);
+		});
+	})();
+</script>
